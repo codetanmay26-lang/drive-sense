@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Mint Green Arc (Speedometer Left Portion) -->
+    <path
+        android:fillColor="#9DF5D3"
+        android:pathData="M 22,62 A 32,32 0 0,1 76.6,39.4 L 64.6,51.4 A 15,15 0 0,0 39,62 Z" />
+
+    <!-- White Arc (Speedometer Right Portion) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 76.6,39.4 A 32,32 0 0,1 86,62 L 69,62 A 15,15 0 0,0 64.6,51.4 Z" />
+
+    <!-- Outer White Border -->
+    <path
+        android:pathData="M 22,62 A 32,32 0 0,1 86,62 L 69,62 A 15,15 0 0,0 39,62 Z"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5" />
+
+    <!-- Center Cutout Semi-circle -->
+    <path
+        android:fillColor="#281A46"
+        android:pathData="M 39,62 A 15,15 0 0,1 69,62 Z" />
+
+    <!-- Center Gauge Pointer (White Teardrop Needle) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 54,62 C 50,62 48,58 52,53 C 54,50 56,48 57,48 C 58,48 59,51 58,54 C 57,59 57,62 54,62 Z" />
+
+</vector>

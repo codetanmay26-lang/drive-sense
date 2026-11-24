@@ -7,14 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <!-- Splash screen theme (no action bar, full screen) -->
+    <!-- Splash screen theme -->
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <!-- Full screen theme for auth screens -->
@@ -22,38 +23,41 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <!-- Card style -->
+    <!-- Soft Pastel Glassmorphic Card Style -->
     <style name="DriveSenseCard" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">12dp</item>
-        <item name="cardElevation">3dp</item>
+        <item name="cardCornerRadius">22dp</item>
+        <item name="cardElevation">2dp</item>
         <item name="cardBackgroundColor">@color/colorSurface</item>
-        <item name="contentPaddingLeft">16dp</item>
-        <item name="contentPaddingRight">16dp</item>
-        <item name="contentPaddingTop">16dp</item>
-        <item name="contentPaddingBottom">16dp</item>
+        <item name="strokeColor">#E2E8F0</item>
+        <item name="strokeWidth">1dp</item>
     </style>
 
-    <!-- Primary button -->
+    <!-- Dark Pill Button Style (From Template) -->
     <style name="DriveSenseButton" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">8dp</item>
-        <item name="backgroundTint">@color/colorPrimary</item>
-        <item name="android:textColor">@color/colorTextOnPrimary</item>
-        <item name="android:letterSpacing">0.05</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="backgroundTint">@color/colorDarkButton</item>
+        <item name="android:textColor">@color/colorDarkButtonText</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Outline button -->
     <style name="DriveSenseButtonOutline" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">20dp</item>
         <item name="strokeColor">@color/colorPrimary</item>
+        <item name="strokeWidth">1dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- Section header text -->
@@ -69,7 +73,7 @@
     <style name="DriveSenseValueText">
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
 </resources>

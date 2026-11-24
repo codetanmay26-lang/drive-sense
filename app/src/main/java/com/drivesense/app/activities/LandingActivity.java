@@ -18,8 +18,7 @@ public class LandingActivity extends AppCompatActivity {
         findViewById(R.id.btn_get_started).setOnClickListener(v -> {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             prefs.edit().putBoolean("landing_seen", true).apply();
-            boolean loggedIn = prefs.getBoolean("logged_in", false);
-            startActivity(new Intent(this, loggedIn ? HomeActivity.class : LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
     }

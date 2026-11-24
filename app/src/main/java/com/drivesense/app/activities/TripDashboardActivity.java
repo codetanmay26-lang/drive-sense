@@ -1,5 +1,6 @@
 package com.drivesense.app.activities;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,6 +34,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
@@ -71,8 +73,8 @@ public class TripDashboardActivity extends AppCompatActivity {
     private final Handler demoHandler = new Handler(Looper.getMainLooper());
     private final Random demoRandom = new Random();
     private long demoStartedAt = System.currentTimeMillis();
-    private double demoDistanceKm = 4.8;
-    private float demoSpeed = 42f;
+    private double demoDistanceKm = 0.0;
+    private float demoSpeed = 38f;
 
     // Event counters
     private int cntBraking = 0, cntAccel = 0, cntTurn = 0;
@@ -117,6 +119,7 @@ public class TripDashboardActivity extends AppCompatActivity {
         BackNavigation.attach(this);
         bindViews();
         setupCharts();
+        loadDriverAdminData();
         getSharedPreferences("drivesense_demo", MODE_PRIVATE).edit()
                 .putLong("ride_start", System.currentTimeMillis())
                 .apply();
@@ -135,11 +138,7 @@ public class TripDashboardActivity extends AppCompatActivity {
         filter.addAction(TripMonitorService.ACTION_UPDATE);
         filter.addAction(TripMonitorService.ACTION_EVENT_DETECTED);
         filter.addAction(TripMonitorService.ACTION_TRIP_ENDED);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(updateReceiver, filter, Context.RECEIVER_NOT_EXPORTED);
-        } else {
-            registerReceiver(updateReceiver, filter);
-        }
+        ContextCompat.registerReceiver(this, updateReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
     }
 
     @Override
@@ -238,24 +237,86 @@ public class TripDashboardActivity extends AppCompatActivity {
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
+    private void loadDriverAdminData() {
+        if (getIntent().hasExtra("driver_name")) {
+            String driverName = getIntent().getStringExtra("driver_name");
+            String vehicleNo = getIntent().getStringExtra("vehicle_no");
+            int driverScore = getIntent().getIntExtra("driver_score", 92);
+            String speedStr = getIntent().getStringExtra("driver_speed");
+            String limitStr = getIntent().getStringExtra("driver_speed_limit");
+            String distStr = getIntent().getStringExtra("driver_distance");
+            String durStr = getIntent().getStringExtra("driver_duration");
+            int hardBrake = getIntent().getIntExtra("hard_braking_count", 0);
+            int rapidAccel = getIntent().getIntExtra("rapid_accel_count", 0);
+            int sharpTurn = getIntent().getIntExtra("sharp_turn_count", 0);
+            int suddenStop = getIntent().getIntExtra("sudden_stop_count", 0);
+            int vibration = getIntent().getIntExtra("vibration_count", 0);
+            int overspeed = getIntent().getIntExtra("overspeed_count", 0);
+            String roadStr = getIntent().getStringExtra("road_condition");
+
+            TextView tvHeaderTitle = findViewById(R.id.tv_dashboard_title);
+            if (tvHeaderTitle != null) {
+                tvHeaderTitle.setText("Driver: " + driverName + (vehicleNo != null ? " (" + vehicleNo + ")" : ""));
+            }
+
+            if (speedStr != null && tvSpeed != null) tvSpeed.setText(speedStr.replaceAll("[^0-9]", ""));
+            if (tvScore != null) {
+                tvScore.setText(String.valueOf(driverScore));
+                updateScoreUI(driverScore);
+            }
+            if (limitStr != null && tvSpeedLimit != null) tvSpeedLimit.setText(limitStr);
+            if (distStr != null && tvDistance != null) tvDistance.setText(distStr);
+            if (durStr != null && tvDuration != null) tvDuration.setText(durStr);
+            if (roadStr != null && tvRoadCondition != null) tvRoadCondition.setText("Road: " + roadStr);
+
+            cntBraking = hardBrake;
+            cntAccel = rapidAccel;
+            cntTurn = sharpTurn;
+            cntStop = suddenStop;
+            cntVib = vibration;
+            cntSpeed = overspeed;
+
+            if (tvHardBraking != null) tvHardBraking.setText(String.valueOf(hardBrake));
+            if (tvRapidAccel != null) tvRapidAccel.setText(String.valueOf(rapidAccel));
+            if (tvSharpTurn != null) tvSharpTurn.setText(String.valueOf(sharpTurn));
+            if (tvSuddenStop != null) tvSuddenStop.setText(String.valueOf(suddenStop));
+            if (tvVibration != null) tvVibration.setText(String.valueOf(vibration));
+            if (tvOverspeed != null) tvOverspeed.setText(String.valueOf(overspeed));
+        }
+    }
+
     private void startDemoFallback() {
         demoHandler.postDelayed(new Runnable() {
             @Override public void run() {
                 if (realDataReceived || isFinishing()) return;
 
-                demoSpeed = Math.max(18f, Math.min(82f,
-                        demoSpeed + demoRandom.nextFloat() * 8f - 4f));
-                demoDistanceKm += demoSpeed / 3600f;
-                long durationMs = System.currentTimeMillis() - demoStartedAt;
+                if (!getIntent().hasExtra("driver_name")) {
+                    demoSpeed = Math.max(18f, Math.min(82f,
+                            demoSpeed + demoRandom.nextFloat() * 8f - 4f));
+                    demoDistanceKm += demoSpeed / 3600f;
+                    long durationMs = System.currentTimeMillis() - demoStartedAt;
 
-                tvSpeed.setText(String.format(Locale.getDefault(), "%.0f", demoSpeed));
-                tvDistance.setText(String.format(Locale.getDefault(), "%.2f km", demoDistanceKm));
-                tvDuration.setText(formatDuration(durationMs));
-                tvRoadCondition.setText("Road: Smooth");
-                tvStatusLabel.setText("Monitoring active");
-                tvStatusLabel.setTextColor(ContextCompat.getColor(TripDashboardActivity.this,
-                        R.color.colorPrimary));
-                tvScore.setText("92");
+                    tvSpeed.setText(String.format(Locale.getDefault(), "%.0f", demoSpeed));
+                    tvDistance.setText(String.format(Locale.getDefault(), "%.2f km", demoDistanceKm));
+                    tvDuration.setText(formatDuration(durationMs));
+                    tvRoadCondition.setText("Road: Smooth");
+
+                    float activeLimit = (demoSpeed > 70f) ? 100f : 60f;
+                    String limitText = (activeLimit >= 100f) ? "100 km/h (Highway)" : "60 km/h (City)";
+                    if (tvSpeedLimit != null) tvSpeedLimit.setText(limitText);
+
+                    if (demoSpeed > activeLimit) {
+                        tvSpeed.setTextColor(ContextCompat.getColor(TripDashboardActivity.this, R.color.colorSeverityHigh));
+                    } else {
+                        tvSpeed.setTextColor(ContextCompat.getColor(TripDashboardActivity.this, R.color.colorPrimary));
+                    }
+
+                    tvStatusLabel.setText("Monitoring active");
+                    tvStatusLabel.setTextColor(ContextCompat.getColor(TripDashboardActivity.this,
+                            R.color.colorPrimary));
+                    tvScore.setText("92");
+                    updateScoreUI(92);
+                }
 
                 float accX = (float) (demoRandom.nextGaussian() * 0.45f);
                 float accY = (float) (demoRandom.nextGaussian() * 0.35f);
@@ -268,11 +329,6 @@ public class TripDashboardActivity extends AppCompatActivity {
                 addGraphEntry(gyroChart, gyroData, gyrXSet, gyrYSet, gyrZSet,
                         gyrX, gyrY, gyrZ);
                 graphX++;
-                cntBraking = 1; cntAccel = 2; cntTurn = 1; cntStop = 1;
-                cntVib = 1; cntSpeed = 1;
-                tvHardBraking.setText("1"); tvRapidAccel.setText("2");
-                tvSharpTurn.setText("1"); tvSuddenStop.setText("1");
-                tvVibration.setText("1"); tvOverspeed.setText("1");
 
                 demoHandler.postDelayed(this, 1000);
             }
@@ -280,14 +336,14 @@ public class TripDashboardActivity extends AppCompatActivity {
     }
 
     private void requestTripPermissions() {
-        java.util.ArrayList<String> permissions = new java.util.ArrayList<>();
-        permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
-        permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+        ArrayList<String> permissions = new ArrayList<>();
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions.add(android.Manifest.permission.POST_NOTIFICATIONS);
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS);
         }
 
-        java.util.ArrayList<String> missing = new java.util.ArrayList<>();
+        ArrayList<String> missing = new ArrayList<>();
         for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(this, permission)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -309,7 +365,7 @@ public class TripDashboardActivity extends AppCompatActivity {
         if (requestCode != TRIP_PERMISSION_REQUEST) return;
 
         boolean locationGranted = ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         if (locationGranted) {
             startTripService();
         } else {
@@ -329,8 +385,19 @@ public class TripDashboardActivity extends AppCompatActivity {
         float distance = intent.getFloatExtra(TripMonitorService.EXTRA_DISTANCE, 0f);
         long  duration = intent.getLongExtra(TripMonitorService.EXTRA_DURATION, 0L);
         String road    = intent.getStringExtra(TripMonitorService.EXTRA_ROAD);
+        float speedLimit = intent.getFloatExtra(TripMonitorService.EXTRA_SPEED_LIMIT, 60f);
+
+        if (speedLimit <= 0f) speedLimit = (speed > 70f) ? 100f : 60f;
+        String limitText = (speedLimit >= 100f) ? "100 km/h (Highway)" : "60 km/h (City)";
+        if (tvSpeedLimit != null) tvSpeedLimit.setText(limitText);
 
         tvSpeed.setText(String.format(Locale.getDefault(), "%.0f", speed));
+        if (speed > speedLimit) {
+            tvSpeed.setTextColor(ContextCompat.getColor(this, R.color.colorSeverityHigh));
+        } else {
+            tvSpeed.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
+
         tvScore.setText(String.valueOf(score));
         tvDistance.setText(String.format(Locale.getDefault(), "%.1f km", distance));
         tvDuration.setText(formatDuration(duration));
@@ -396,9 +463,20 @@ public class TripDashboardActivity extends AppCompatActivity {
                     demoHandler.removeCallbacksAndMessages(null);
                     if (serviceBound && tripService != null) {
                         long durationMs = System.currentTimeMillis() - demoStartedAt;
-                        tripService.configureDemonstrationData(
-                                demoDistanceKm, Math.max(demoSpeed, 106f),
-                                52f, durationMs);
+                        double finalDist = demoDistanceKm;
+                        if (finalDist > 0.05) {
+                            // Live trip tracking: use exact live distance & duration
+                            float avgSpeed = (float) (finalDist / (Math.max(durationMs, 1000L) / 3600000.0));
+                            tripService.configureDemonstrationData(
+                                    finalDist, Math.max(demoSpeed, 55f),
+                                    avgSpeed, durationMs);
+                        } else {
+                            // Full 5.4 km sample trip with matching 10 min 30 sec duration
+                            long sampleDurationMs = (10 * 60 + 30) * 1000L; // 10m 30s
+                            tripService.configureDemonstrationData(
+                                    5.4, 58.0f,
+                                    30.8f, sampleDurationMs);
+                        }
                         tripService.stopTrip();
                     }
                 })

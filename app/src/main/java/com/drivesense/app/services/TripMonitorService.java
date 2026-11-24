@@ -42,6 +42,10 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +82,7 @@ public class TripMonitorService extends Service implements SensorEventListener {
     public static final String EXTRA_DISTANCE    = "distance";
     public static final String EXTRA_DURATION    = "duration";
     public static final String EXTRA_ROAD        = "road";
+    public static final String EXTRA_SPEED_LIMIT = "speed_limit";
     public static final String EXTRA_EVENT_TYPE  = "event_type";
     public static final String EXTRA_TRIP_ID     = "trip_id";
     public static final String EXTRA_PROXIMITY   = "proximity";
@@ -408,10 +413,15 @@ public class TripMonitorService extends Service implements SensorEventListener {
         eventDetector.updateLocation(loc.getLatitude(), loc.getLongitude(), speedMs);
         routeTracker.addPoint(loc.getLatitude(), loc.getLongitude());
 
-        // Check over-speeding vs configured threshold
-        boolean nowSpeeding = currentSpeedLimit > 0
-                ? (speedKmh > currentSpeedLimit)
-                : (speedKmh > getDefaultSpeedLimit());
+        // Dynamic speed limit based on speed & road type: 100 km/h for Expressway/Highway (>72 km/h), 60 km/h for City
+        if (speedKmh > 72f) {
+            currentSpeedLimit = 100f;
+        } else if (speedKmh < 55f || currentSpeedLimit <= 0f) {
+            currentSpeedLimit = 60f;
+        }
+
+        // Check over-speeding vs dynamic limit
+        boolean nowSpeeding = speedKmh > currentSpeedLimit;
 
         if (nowSpeeding) {
             if (!isOverspeeding) {
@@ -492,7 +502,8 @@ public class TripMonitorService extends Service implements SensorEventListener {
                 TripEntity tripEntity = new TripEntity();
                 tripEntity.startTime    = tripStartTime;
                 tripEntity.endTime      = endTime;
-                tripEntity.durationMs   = endTime - tripStartTime;
+                tripEntity.durationMs   = (demonstrationMode && demonstrationDurationMs > 0)
+                        ? demonstrationDurationMs : (endTime - tripStartTime);
                 tripEntity.distanceKm   = demonstrationMode
                         ? demonstrationDistanceKm : routeTracker.getTotalDistanceKm();
                 tripEntity.maxSpeedKmh  = demonstrationMode
@@ -570,7 +581,7 @@ public class TripMonitorService extends Service implements SensorEventListener {
     private String buildDemonstrationRoute() {
         double lat = Double.isNaN(lastLatitude) ? 28.6139 : lastLatitude;
         double lon = Double.isNaN(lastLongitude) ? 77.2090 : lastLongitude;
-        org.json.JSONArray route = new org.json.JSONArray();
+        JSONArray route = new JSONArray();
         try {
             int points = demonstrationDurationMs < 20_000 ? 3
                     : demonstrationDurationMs < 60_000 ? 8
@@ -580,12 +591,12 @@ public class TripMonitorService extends Service implements SensorEventListener {
             double lonStep = 0.00085 * points * Math.min(1.0,
                     Math.max(0.15, demonstrationDistanceKm / 5.0));
             for (int i = 0; i <= points; i++) {
-                org.json.JSONObject point = new org.json.JSONObject();
+                JSONObject point = new JSONObject();
                 point.put("lat", lat + i * latStep / points);
                 point.put("lon", lon + i * lonStep / points);
                 route.put(point);
             }
-        } catch (org.json.JSONException ignored) {}
+        } catch (JSONException ignored) {}
         return route.toString();
     }
 
@@ -598,6 +609,7 @@ public class TripMonitorService extends Service implements SensorEventListener {
         intent.putExtra(EXTRA_DISTANCE, (float)routeTracker.getTotalDistanceKm());
         intent.putExtra(EXTRA_DURATION, System.currentTimeMillis() - tripStartTime);
         intent.putExtra(EXTRA_ROAD,     DrivingEventDetector.classifyRoadCondition(roadVibrationAvg));
+        intent.putExtra(EXTRA_SPEED_LIMIT, currentSpeedLimit <= 0f ? 60f : currentSpeedLimit);
         intent.putExtra(EXTRA_PROXIMITY, lastProximity);
         intent.putExtra(EXTRA_LIGHT,    lastLight);
         // Pass raw sensor values for graphs

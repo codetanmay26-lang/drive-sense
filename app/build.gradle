@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 android {
     namespace 'com.drivesense.app'
-    compileSdk 34
+    compileSdk 37
 
     sourceSets {
         main.java.srcDirs = ['src/main/java']
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "com.drivesense.app"
         minSdk 26
-        targetSdk 34
+        targetSdk 37
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

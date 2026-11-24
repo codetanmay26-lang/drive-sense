@@ -64,6 +64,8 @@
         <!-- Main screens -->
         <activity android:name=".activities.HomeActivity" android:exported="false" />
         <activity android:name=".activities.TripDashboardActivity" android:exported="false" />
+        <activity android:name=".activities.DriverDashboardActivity" android:exported="false" />
+        <activity android:name=".activities.AdminFleetDashboardActivity" android:exported="false" />
         <activity android:name=".activities.TripSummaryActivity" android:exported="false" />
         <activity android:name=".activities.TripHistoryActivity" android:exported="false" />
         <activity android:name=".activities.TripDetailActivity" android:exported="false" />

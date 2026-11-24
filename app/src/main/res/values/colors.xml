@@ -1,52 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Brand colors -->
-    <color name="colorPrimary">#1565C0</color>
-    <color name="colorPrimaryDark">#0D47A1</color>
-    <color name="colorPrimaryLight">#1E88E5</color>
-    <color name="colorAccent">#00ACC1</color>
+    <!-- Brand & Theme Colors (Soft Glassmorphic Pastel Palette) -->
+    <color name="colorPrimary">#1E1B2E</color>
+    <color name="colorPrimaryDark">#141122</color>
+    <color name="colorPrimaryLight">#332F48</color>
+    <color name="colorAccent">#8B5CF6</color>
 
-    <!-- Background -->
-    <color name="colorBackground">#F5F7FA</color>
+    <!-- Backgrounds -->
+    <color name="colorBackground">#EBF2FC</color>
     <color name="colorSurface">#FFFFFF</color>
-    <color name="colorSurfaceVariant">#EEF2F7</color>
+    <color name="colorSurfaceVariant">#F1F5F9</color>
 
-    <!-- Text -->
-    <color name="colorTextPrimary">#1A1A2E</color>
+    <!-- Pastel Card Tints (From Template) -->
+    <color name="colorCardLavender">#F1ECFC</color>
+    <color name="colorCardIceBlue">#E3F2FD</color>
+    <color name="colorCardYellow">#FEF3C7</color>
+    <color name="colorCardPeach">#FEE2E2</color>
+    <color name="colorCardMint">#ECFDF5</color>
+
+    <!-- Dark Pill Button & Accent -->
+    <color name="colorDarkButton">#1E1B2E</color>
+    <color name="colorDarkButtonText">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="colorTextPrimary">#1E1B2E</color>
     <color name="colorTextSecondary">#6B7280</color>
     <color name="colorTextOnPrimary">#FFFFFF</color>
 
-    <!-- Score / Status colors -->
-    <color name="colorScoreExcellent">#2E7D32</color>
-    <color name="colorScoreGood">#9E9D24</color>
-    <color name="colorScoreAverage">#E65100</color>
-    <color name="colorScorePoor">#C62828</color>
+    <!-- Score & Status Colors -->
+    <color name="colorScoreExcellent">#10B981</color>
+    <color name="colorScoreGood">#84CC16</color>
+    <color name="colorScoreAverage">#F59E0B</color>
+    <color name="colorScorePoor">#EF4444</color>
 
-    <!-- Event severity colors -->
-    <color name="colorSeverityLow">#FFC107</color>
-    <color name="colorSeverityMedium">#FF5722</color>
-    <color name="colorSeverityHigh">#D32F2F</color>
+    <!-- Event Severity Colors -->
+    <color name="colorSeverityLow">#F59E0B</color>
+    <color name="colorSeverityMedium">#F97316</color>
+    <color name="colorSeverityHigh">#EF4444</color>
 
-    <!-- Road condition -->
-    <color name="colorRoadSmooth">#388E3C</color>
-    <color name="colorRoadModerate">#F57C00</color>
-    <color name="colorRoadRough">#D32F2F</color>
+    <!-- Road Condition Colors -->
+    <color name="colorRoadSmooth">#10B981</color>
+    <color name="colorRoadModerate">#F59E0B</color>
+    <color name="colorRoadRough">#EF4444</color>
 
-    <!-- Graph colors -->
-    <color name="colorGraphX">#EF5350</color>
-    <color name="colorGraphY">#26A69A</color>
-    <color name="colorGraphZ">#5C6BC0</color>
-    <color name="colorGraphFill">#1A1565C0</color>
+    <!-- Graph Colors -->
+    <color name="colorGraphX">#EF4444</color>
+    <color name="colorGraphY">#10B981</color>
+    <color name="colorGraphZ">#6366F1</color>
+    <color name="colorGraphFill">#1A8B5CF6</color>
 
-    <!-- Card -->
+    <!-- Card Borders & Dividers -->
     <color name="colorCard">#FFFFFF</color>
-    <color name="colorCardBorder">#E0E7EF</color>
+    <color name="colorCardBorder">#E2E8F0</color>
+    <color name="colorCardBg">#F8FAFC</color>
+    <color name="colorDivider">#E2E8F0</color>
 
-    <!-- Divider -->
-    <color name="colorDivider">#E0E0E0</color>
+    <!-- App Launcher Icon Background -->
+    <color name="ic_launcher_background">#281A46</color>
 
-    <!-- Dark theme colors -->
-    <color name="colorPrimaryDarkTheme">#0D47A1</color>
+    <!-- Dark Theme Support -->
+    <color name="colorPrimaryDarkTheme">#141122</color>
     <color name="colorBackgroundDark">#121212</color>
     <color name="colorSurfaceDark">#1E1E1E</color>
     <color name="colorTextPrimaryDark">#E0E0E0</color>

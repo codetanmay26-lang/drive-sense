@@ -4,8 +4,11 @@ buildscript {
         google()
         mavenCentral()
     }
+    configurations.all {
+        resolutionStrategy.force 'org.jetbrains.kotlin:kotlin-reflect:2.3.21'
+    }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.3'
+        classpath 'com.android.tools.build:gradle:9.4.0'
     }
 }
 

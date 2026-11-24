@@ -62,18 +62,21 @@ public class TripDetailActivity extends AppCompatActivity {
                 tvDate.setText(sdf.format(new Date(tripEntity.startTime)));
 
                 long secs = tripEntity.durationMs / 1000;
-                tvDuration.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d",
-                        secs/3600, (secs%3600)/60, secs%60));
+                if (secs >= 3600) {
+                    tvDuration.setText(String.format(Locale.getDefault(), "%dh %dm %ds", secs / 3600, (secs % 3600) / 60, secs % 60));
+                } else {
+                    tvDuration.setText(String.format(Locale.getDefault(), "%dm %ds", secs / 60, secs % 60));
+                }
                 tvDistance.setText(String.format(Locale.getDefault(), "%.1f km", tripEntity.distanceKm));
                 tvAvgSpeed.setText(String.format(Locale.getDefault(), "%.1f km/h", tripEntity.avgSpeedKmh));
                 tvMaxSpeed.setText(String.format(Locale.getDefault(), "%.1f km/h", tripEntity.maxSpeedKmh));
 
                 String events = "Hard Braking: " + tripEntity.hardBrakingCount
-                        + "\nRapid Acceleration: " + tripEntity.rapidAccelCount
+                        + "   |   Rapid Accel: " + tripEntity.rapidAccelCount
                         + "\nSharp Turns: " + tripEntity.sharpTurnCount
-                        + "\nSudden Stops: " + tripEntity.suddenStopCount
+                        + "   |   Sudden Stops: " + tripEntity.suddenStopCount
                         + "\nVibration: " + tripEntity.vibrationCount
-                        + "\nOver-Speed: " + tripEntity.overspeedCount;
+                        + "   |   Overspeed: " + tripEntity.overspeedCount;
                 tvEvents.setText(events);
 
                 btnMap.setOnClickListener(v -> {

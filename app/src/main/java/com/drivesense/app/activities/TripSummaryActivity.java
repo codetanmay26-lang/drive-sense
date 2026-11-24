@@ -102,8 +102,11 @@ public class TripSummaryActivity extends AppCompatActivity {
         tvTripDate.setText(sdf.format(new Date(t.startTime)));
 
         long secs = t.durationMs / 1000;
-        tvDuration.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d",
-                secs/3600, (secs%3600)/60, secs%60));
+        if (secs >= 3600) {
+            tvDuration.setText(String.format(Locale.getDefault(), "%dh %dm %ds", secs / 3600, (secs % 3600) / 60, secs % 60));
+        } else {
+            tvDuration.setText(String.format(Locale.getDefault(), "%dm %ds", secs / 60, secs % 60));
+        }
         tvDistance.setText(String.format(Locale.getDefault(), "%.1f km", t.distanceKm));
         tvAvgSpeed.setText(String.format(Locale.getDefault(), "%.1f km/h", t.avgSpeedKmh));
         tvMaxSpeed.setText(String.format(Locale.getDefault(), "%.1f km/h", t.maxSpeedKmh));
