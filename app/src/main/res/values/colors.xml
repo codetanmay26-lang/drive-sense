@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand colors -->
+    <color name="colorPrimary">#1565C0</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorPrimaryLight">#1E88E5</color>
+    <color name="colorAccent">#00ACC1</color>
+
+    <!-- Background -->
+    <color name="colorBackground">#F5F7FA</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorSurfaceVariant">#EEF2F7</color>
+
+    <!-- Text -->
+    <color name="colorTextPrimary">#1A1A2E</color>
+    <color name="colorTextSecondary">#6B7280</color>
+    <color name="colorTextOnPrimary">#FFFFFF</color>
+
+    <!-- Score / Status colors -->
+    <color name="colorScoreExcellent">#2E7D32</color>
+    <color name="colorScoreGood">#9E9D24</color>
+    <color name="colorScoreAverage">#E65100</color>
+    <color name="colorScorePoor">#C62828</color>
+
+    <!-- Event severity colors -->
+    <color name="colorSeverityLow">#FFC107</color>
+    <color name="colorSeverityMedium">#FF5722</color>
+    <color name="colorSeverityHigh">#D32F2F</color>
+
+    <!-- Road condition -->
+    <color name="colorRoadSmooth">#388E3C</color>
+    <color name="colorRoadModerate">#F57C00</color>
+    <color name="colorRoadRough">#D32F2F</color>
+
+    <!-- Graph colors -->
+    <color name="colorGraphX">#EF5350</color>
+    <color name="colorGraphY">#26A69A</color>
+    <color name="colorGraphZ">#5C6BC0</color>
+    <color name="colorGraphFill">#1A1565C0</color>
+
+    <!-- Card -->
+    <color name="colorCard">#FFFFFF</color>
+    <color name="colorCardBorder">#E0E7EF</color>
+
+    <!-- Divider -->
+    <color name="colorDivider">#E0E0E0</color>
+
+    <!-- Dark theme colors -->
+    <color name="colorPrimaryDarkTheme">#0D47A1</color>
+    <color name="colorBackgroundDark">#121212</color>
+    <color name="colorSurfaceDark">#1E1E1E</color>
+    <color name="colorTextPrimaryDark">#E0E0E0</color>
+</resources>

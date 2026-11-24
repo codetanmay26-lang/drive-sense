@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+    <ImageButton android:id="@+id/btn_back" android:layout_width="48dp" android:layout_height="48dp" android:layout_gravity="top|start" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Back" android:src="@drawable/ic_back"/>
+    <TextView android:id="@+id/tv_trip_date" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_final_score" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="56sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_rating" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="22sp"/>
+    <View android:id="@+id/score_bar" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="8dp"/>
+    <TextView android:id="@+id/tv_duration" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_distance" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_avg_speed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_max_speed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_road_condition" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"/>
+    <TextView android:id="@+id/tv_hard_braking_count" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_rapid_accel_count" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_sharp_turn_count" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_sudden_stop_count" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_vibration_count" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/tv_overspeed_count" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <Button android:id="@+id/btn_view_map" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="View Route"/>
+    <Button android:id="@+id/btn_export" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/share_report"/>
+    <Button android:id="@+id/btn_home" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Home"/>
+</LinearLayout>
+</ScrollView>

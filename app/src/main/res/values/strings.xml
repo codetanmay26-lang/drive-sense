@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DriveSense</string>
+    <string name="title_activity_maps">Map</string>
+    <!-- Auth -->
+    <string name="login">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="already_have_account">Already have an account? Log In</string>
+    <string name="no_account">Don\'t have an account? Sign Up</string>
+
+    <!-- Home -->
+    <string name="start_trip">Start Trip</string>
+    <string name="trip_history">Trip History</string>
+    <string name="settings">Settings</string>
+    <string name="last_trip_score">Last Trip Score</string>
+    <string name="no_trips_yet">No trips recorded yet</string>
+
+    <!-- Dashboard -->
+    <string name="stop_trip">Stop Trip</string>
+    <string name="current_speed">0 km/h</string>
+    <string name="driving_score">Score: 100</string>
+    <string name="trip_duration">00:00:00</string>
+    <string name="trip_distance">0.0 km</string>
+    <string name="road_condition">Road: Good</string>
+    <string name="fatigue_warning">Rest Suggested</string>
+    <string name="speed_limit_label">Limit: -- km/h</string>
+
+    <!-- Event types -->
+    <string name="event_hard_braking">Hard Braking</string>
+    <string name="event_rapid_accel">Rapid Acceleration</string>
+    <string name="event_sharp_turn">Sharp Turn</string>
+    <string name="event_sudden_stop">Sudden Stop</string>
+    <string name="event_vibration">Excessive Vibration</string>
+    <string name="event_overspeeding">Over-Speeding</string>
+
+    <!-- Settings -->
+    <string name="sensitivity_label">Sensor Sensitivity</string>
+    <string name="speed_alert_label">Speed Alert Threshold</string>
+    <string name="fatigue_interval_label">Fatigue Alert Interval (minutes)</string>
+    <string name="auto_start_label">Auto-Start Trip (Proximity Sensor)</string>
+    <string name="auto_theme_label">Auto Day/Night Theme (Light Sensor)</string>
+    <string name="export_data_label">Export Trip Data</string>
+    <string name="sensor_diagnostic_label">Sensor Diagnostic</string>
+
+    <!-- Score ratings -->
+    <string name="rating_excellent">Excellent</string>
+    <string name="rating_good">Good</string>
+    <string name="rating_average">Average</string>
+    <string name="rating_poor">Poor</string>
+
+    <!-- Notifications -->
+    <string name="trip_monitoring_notification_title">DriveSense Active</string>
+    <string name="trip_monitoring_notification_text">Monitoring your driving behavior</string>
+    <string name="channel_trip_monitoring">Trip Monitoring</string>
+    <string name="channel_alerts">Driving Alerts</string>
+    <string name="fatigue_alert_title">Fatigue Warning</string>
+    <string name="fatigue_alert_text">You have been driving for a long time. Consider taking a break.</string>
+    <string name="speed_alert_title">Speed Alert</string>
+    <string name="speed_alert_text">You are exceeding the speed limit.</string>
+
+    <!-- Misc -->
+    <string name="permission_location_rationale">DriveSense needs location access to track your trip route and speed.</string>
+    <string name="gps_unavailable">GPS not available. Please enable location services.</string>
+    <string name="sensor_unavailable">Some sensors are not available on this device. Features may be limited.</string>
+    <string name="trip_saved">Trip saved successfully.</string>
+    <string name="export_success">Trip report exported.</string>
+    <string name="share_report">Share Report</string>
+</resources>

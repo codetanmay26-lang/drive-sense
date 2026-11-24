@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+    <ImageButton android:id="@+id/btn_back" android:layout_width="48dp" android:layout_height="48dp" android:layout_gravity="top|start" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Back" android:src="@drawable/ic_back"/>
+    <TextView android:id="@+id/tv_status_label" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Monitoring" android:textSize="18sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/tv_speed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="0" android:textSize="52sp" android:textStyle="bold"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="km/h"/>
+    <TextView android:id="@+id/tv_score" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="100" android:textSize="34sp"/>
+    <View android:id="@+id/score_indicator" android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="8dp" android:background="@color/colorScoreExcellent"/>
+    <TextView android:id="@+id/tv_duration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/trip_duration"/>
+    <TextView android:id="@+id/tv_distance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/trip_distance"/>
+    <TextView android:id="@+id/tv_road_condition" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/road_condition"/>
+    <TextView android:id="@+id/tv_speed_limit" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/speed_limit_label"/>
+    <com.github.mikephil.charting.charts.LineChart android:id="@+id/chart_accelerometer" android:layout_width="match_parent" android:layout_height="180dp" android:layout_marginTop="12dp"/>
+    <com.github.mikephil.charting.charts.LineChart android:id="@+id/chart_gyroscope" android:layout_width="match_parent" android:layout_height="180dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Events" android:textStyle="bold" android:layout_marginTop="8dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:id="@+id/tv_hard_braking" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0"/>
+        <TextView android:id="@+id/tv_rapid_accel" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0"/>
+        <TextView android:id="@+id/tv_sharp_turn" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0"/>
+        <TextView android:id="@+id/tv_sudden_stop" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0"/>
+        <TextView android:id="@+id/tv_vibration" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0"/>
+        <TextView android:id="@+id/tv_overspeed" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0"/>
+    </LinearLayout>
+    <Button android:id="@+id/btn_event_log" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Event Log"/>
+    <Button android:id="@+id/btn_stop_trip" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/stop_trip"/>
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="12dp">
+    <ImageButton android:id="@+id/btn_back" android:layout_width="48dp" android:layout_height="48dp" android:layout_gravity="top|start" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Back" android:src="@drawable/ic_back"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_margin="8dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/trip_history" android:textSize="26sp" android:textStyle="bold"/>
+        <com.google.android.material.button.MaterialButton android:id="@+id/btn_clear_history"
+            android:layout_width="wrap_content" android:layout_height="44dp"
+            android:text="Clear History" android:textAllCaps="false"
+            android:textColor="@color/colorPrimaryDark" android:textSize="14sp"
+            app:backgroundTint="@color/colorSurface"
+            app:strokeColor="@color/colorPrimary" app:strokeWidth="1dp"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/tv_empty" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:padding="32dp" android:text="@string/no_trips_yet"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_trips" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+</LinearLayout>
